@@ -1,0 +1,22 @@
+# Blueprint do Render: New > Blueprint > escolha este repositório.
+services:
+  - type: web
+    name: ecordena-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn ecordena.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: TELEGRAM_TOKEN      # token do BotFather
+        sync: false
+      - key: GROQ_KEY            # console.groq.com > API Keys
+        sync: false
+      - key: GEMINI_KEY          # aistudio.google.com (reserva, opcional)
+        sync: false
+      - key: SHEET_ID            # trecho da URL da planilha entre /d/ e /edit
+        sync: false
+      - key: GOOGLE_CREDENTIALS  # conteúdo inteiro do JSON da conta de serviço
+        sync: false
+      - key: APP_SECRET          # senha sua, só letras e números (protege /setup e /cron)
+        sync: false
